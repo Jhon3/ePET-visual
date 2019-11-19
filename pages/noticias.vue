@@ -47,7 +47,10 @@
                   @click="removerNoticias(row.item.idNoticia)"
                   class="btn btn-sm btn-danger"
                 >Deletar</b-button>
-                <a href="https://docs.google.com/presentation/d/1sbv5iI7XuXNwZ5Ebxe3EmYCnly-sRDSTlfAXJROP7ZM/export/pdf?id=1sbv5iI7XuXNwZ5Ebxe3EmYCnly-sRDSTlfAXJROP7ZM&pageid=p" target="_blank">Download</a>
+                <b-button
+                  @click="downloadfile(row.item)"
+                  class="btn btn-sm"
+                >Download</b-button>
               </template>
             </b-table>
             <nav>
@@ -162,6 +165,13 @@ export default {
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];
+    },
+    downloadfile(file){
+      window.open('data:text/html;charset=utf-8,' +
+    encodeURIComponent(
+        file.anexos
+    )
+)
     }
   }
 };
