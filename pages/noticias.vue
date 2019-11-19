@@ -1,6 +1,6 @@
 <template>
   <div class="animated fadeIn">
-    <div v-if="tableItems && tableItems.length > 0">
+    <div>
       <b-row>
         <b-col md="12">
           <b-card header="Criar notícia">
@@ -18,6 +18,12 @@
                 <b-form-input type="date" required placeholder="Insira o título" v-model="noticia.data_fim"></b-form-input>
               </b-form-group>
 
+              <b-form-group label="Anexo">
+                <label><input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                </label>
+
+              </b-form-group>
+
               <b-button @click="sendNoticia()" variant="primary">Cadastrar</b-button>
             </b-form>
           </b-card>
@@ -31,7 +37,7 @@
               responsive="sm"
               :current-page="currentPage"
               hover
-              :items="tableItems"
+              :items="noticias"
               :fields="tableFields"
               :per-page="10"
               head-variant="light"
@@ -57,7 +63,7 @@
         </b-col>
       </b-row>
     </div>
-    <div class="row" v-else>Nenhum evento cadastrado.</div>
+    <div class="row">Nenhum evento cadastrado.</div>
   </div>
 </template>
 
@@ -72,6 +78,8 @@ export default {
   components: {},
   data: function() {
     return {
+      file: '',
+      noticias: [],
       noticia: {
         titulo: "",
         corpo: "",
@@ -118,26 +126,47 @@ export default {
         .then(res => this.getNoticias());
     },
     async sendNoticia() {
-      await axios
+
+      let formData = new FormData();
+      formData.append('file', this.file);
+      let arquivo = new URLSearchParams(formData).toString();
+
+      /*await axios
         .post(
           "http://localhost:8080/api/noticia-cadastro/1",
           {
             titulo: this.noticia.titulo,
             corpo: this.noticia.corpo,
             inicio_exibicao: this.noticia.data_inicio,
-            limite_exibicao: this.noticia.data_fim
+            limite_exibicao: this.noticia.data_fim,
+            anexos: arquivo
           },
           { auth: { username: "h@email.com", password: "password" } }
         )
         .then(res => console.log(res));
-      this.getNoticias();
+
+        await axios.post(`http://localhost:8080/api/anexos-noticia-upload/${res._id}`, {});
+      
+      this.getNoticias();*/
+
+      this.noticias.append({
+            titulo: this.noticia.titulo,
+            corpo: this.noticia.corpo,
+            inicio_exibicao: this.noticia.data_inicio,
+            limite_exibicao: this.noticia.data_fim,
+            anexos: arquivo
+          });
 
       this.noticia.titulo = "";
       this.noticia.corpo = "";
       this.noticia.data_inicio = "";
       this.noticia.data_fim = "";
+      this.file = null;
 
       console.log(this.noticia.corpo);
+    },
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
     }
   }
 };

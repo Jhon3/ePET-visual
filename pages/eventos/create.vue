@@ -16,8 +16,16 @@
             <input type="text" class="form-control" v-model="form.descricao" />
           </div>
           <div class="form-group">
-            <label for="exampleFormControlInput1">Local</label>
+            <label for="exampleFormControlInput1">Locais</label>
             <input type="text" class="form-control" v-model="form.local" />
+            <b-button v-on:click="adicionar">Adicionar</b-button>
+          </div>
+          <div>
+            <ul>
+              <li v-for="local in this.locais" v-bind:key="local">
+                {{local}}
+              </li>
+            </ul>
           </div>
           <div class="form-group">
             <label for="exampleFormControlInput1">Carga Horaria</label>
@@ -70,6 +78,7 @@ export default {
         d_inscricao: "",
         ativo: false
       },
+      locais: ["A", "B"],
       alert: {
         message: "",
         class: ""
@@ -78,6 +87,7 @@ export default {
   },
   methods: {
     submitForm(e) {
+      this.form.locais = this.locais;
       axios
         .post("eventos-cadastrar", this.form)
         .then(res => {
@@ -92,6 +102,13 @@ export default {
           this.alert.message = "Evento NÃO cadastrado. Tente novamente";
         });
       e.preventDefault();
+    },
+    adicionar(){
+      let valor = this.form.local;
+      this.form.local = "";
+      locais.append(valor);
+      return null;
+      
     }
   }
 };
