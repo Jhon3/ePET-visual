@@ -24,7 +24,7 @@
 
               </b-form-group>
 
-              <b-button @click="sendNoticia()" variant="primary">Cadastrar</b-button>
+              <b-button @click="sendNoticia()" type="button" variant="primary">Cadastrar</b-button>
             </b-form>
           </b-card>
         </b-col>
@@ -37,7 +37,7 @@
               responsive="sm"
               :current-page="currentPage"
               hover
-              :items="noticias"
+              :items="tableItems"
               :fields="tableFields"
               :per-page="10"
               head-variant="light"
@@ -47,6 +47,7 @@
                   @click="removerNoticias(row.item.idNoticia)"
                   class="btn btn-sm btn-danger"
                 >Deletar</b-button>
+                <a href="https://docs.google.com/presentation/d/1sbv5iI7XuXNwZ5Ebxe3EmYCnly-sRDSTlfAXJROP7ZM/export/pdf?id=1sbv5iI7XuXNwZ5Ebxe3EmYCnly-sRDSTlfAXJROP7ZM&pageid=p" target="_blank">Download</a>
               </template>
             </b-table>
             <nav>
@@ -94,7 +95,7 @@ export default {
         { key: "limite_exibicao", label:"Fim" },
         { key: "titulo", label: "Titulo" },
         { key: "corpo", label: "Notícia" },
-        { key: "actions", label: "Ações" }
+        { key: "actions", label: "Ações" },
       ]
     };
   },
@@ -130,32 +131,26 @@ export default {
       let formData = new FormData();
       formData.append('file', this.file);
       let arquivo = new URLSearchParams(formData).toString();
+      let noticia_arq = null;
 
-      /*await axios
+      await axios
         .post(
           "http://localhost:8080/api/noticia-cadastro/1",
           {
             titulo: this.noticia.titulo,
             corpo: this.noticia.corpo,
             inicio_exibicao: this.noticia.data_inicio,
-            limite_exibicao: this.noticia.data_fim,
-            anexos: arquivo
+            limite_exibicao: this.noticia.data_fim
           },
           { auth: { username: "h@email.com", password: "password" } }
         )
-        .then(res => console.log(res));
+        .then(res => {noticia_arq = res; console.log(res);});
 
-        await axios.post(`http://localhost:8080/api/anexos-noticia-upload/${res._id}`, {});
+        await axios.post(`http://localhost:8080/api/anexos-noticia-upload/${noticia_arq._id}`, {
+          anexos: arquivo
+        });
       
-      this.getNoticias();*/
-
-      this.noticias.append({
-            titulo: this.noticia.titulo,
-            corpo: this.noticia.corpo,
-            inicio_exibicao: this.noticia.data_inicio,
-            limite_exibicao: this.noticia.data_fim,
-            anexos: arquivo
-          });
+      this.getNoticias();
 
       this.noticia.titulo = "";
       this.noticia.corpo = "";
