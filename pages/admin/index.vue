@@ -1,107 +1,28 @@
 <template>
   <div class="animated fadeIn">
-    <b-row>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-primary">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
-          </b-card-body>
-          <card-line1-chart-example class="chart-wrapper px-3" style="height:70px;" height="70" />
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-info">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right no-caret>
-              <template slot="button-content">
-                <i class="icon-location-pin"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
-          </b-card-body>
-          <card-line2-chart-example class="chart-wrapper px-3" style="height:70px;" height="70" />
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-warning">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
-          </b-card-body>
-          <card-line3-chart-example class="chart-wrapper" style="height:70px;" height="70" />
-        </b-card>
-      </b-col>
-      <b-col sm="6" lg="3">
-        <b-card no-body class="bg-danger">
-          <b-card-body class="pb-0">
-            <b-dropdown class="float-right" variant="transparent p-0" right>
-              <template slot="button-content">
-                <i class="icon-settings"></i>
-              </template>
-              <b-dropdown-item>Action</b-dropdown-item>
-              <b-dropdown-item>Another action</b-dropdown-item>
-              <b-dropdown-item>Something else here...</b-dropdown-item>
-              <b-dropdown-item disabled>Disabled action</b-dropdown-item>
-            </b-dropdown>
-            <h4 class="mb-0">9.823</h4>
-            <p>Members online</p>
-          </b-card-body>
-          <card-bar-chart-example class="chart-wrapper px-3" style="height:70px;" height="70" />
-        </b-card>
-      </b-col>
-    </b-row>
-
+    <b-card>
+      <b-row>
+        <img src="../..//static/img/logo.png" style="height:200px; padding:20px; align: center;"/>
+      </b-row>
+    </b-card>
     <b-card>
       <b-row>
         <b-col sm="5">
-          <h4 id="traffic" class="card-title mb-0">Traffic</h4>
-          <div class="small text-muted">November 2017</div>
+          <h4 id="traffic" class="card-title mb-0">A plataforma perfeita para a sua escola</h4>
         </b-col>
-        <b-col sm="7" class="d-none d-md-block">
-          <b-button type="button" variant="primary" class="float-right">
-            <i class="icon-cloud-download"></i>
-          </b-button>
-          <b-button-toolbar class="float-right" aria-label="Toolbar with buttons group">
-            <b-form-radio-group
-              class="mr-3"
-              id="radiosBtn"
-              buttons
-              button-variant="outline-secondary"
-              v-model="selected"
-              name="radiosBtn"
-            >
-              <b-form-radio class="mx-0" value="Day">Day</b-form-radio>
-              <b-form-radio class="mx-0" value="Month">Month</b-form-radio>
-              <b-form-radio class="mx-0" value="Year">Year</b-form-radio>
-            </b-form-radio-group>
-          </b-button-toolbar>
-        </b-col>
+        <p>Agora a sua escola pode ter a melhor plataforma de administração.<br />
+        Muito mais do que uma simples plataforma, controle tutorias, eventos e disciplinas de uma maneira
+        única, e muito mais a vim.
+         No mundo atual, o consenso sobre a necessidade de qualificação não pode mais se dissociar do sistema de participação geral. A certificação de metodologias que nos auxiliam a lidar com a necessidade de renovação processual talvez venha a ressaltar a relatividade das diretrizes de desenvolvimento para o futuro. As experiências acumuladas demonstram que a percepção das dificuldades exige a precisão e a definição do sistema de formação de quadros que corresponde às necessidades. <br />
+
+          Caros amigos, o acompanhamento das preferências de consumo cumpre um papel essencial na formulação de alternativas às soluções ortodoxas. Nunca é demais lembrar o peso e o significado destes problemas, uma vez que a consolidação das estruturas acarreta um processo de reformulação e modernização das condições financeiras e administrativas exigidas. O que temos que ter sempre em mente é que o aumento do diálogo entre os diferentes setores produtivos nos obriga à análise das formas de ação. Por conseguinte, a valorização de fatores subjetivos estimula a padronização do orçamento setorial. Assim mesmo, o desenvolvimento contínuo de distintas formas de atuação promove a alavancagem das condições inegavelmente apropriadas. <br />
+
+          Acima de tudo, é fundamental ressaltar que a mobilidade dos capitais internacionais apresenta tendências no sentido de aprovar a manutenção dos métodos utilizados na avaliação de resultados. O incentivo ao avanço tecnológico, assim como a complexidade dos estudos efetuados aponta para a melhoria do retorno esperado a longo prazo. Pensando mais a longo prazo, o desafiador cenário globalizado facilita a criação de todos os recursos funcionais envolvidos. <br />
+
+          Do mesmo modo, a hegemonia do ambiente político representa uma abertura para a melhoria do impacto na agilidade decisória. Desta maneira, o fenômeno da Internet ainda não demonstrou convincentemente que vai participar na mudança dos níveis de motivação departamental. É importante questionar o quanto a consulta aos diversos militantes prepara-nos para enfrentar situações atípicas decorrentes dos índices pretendidos. Podemos já vislumbrar o modo pelo qual a expansão dos mercados mundiais assume importantes posições no estabelecimento do processo de comunicação como um todo. <br />
+
+          Gostaria de enfatizar que o julgamento imparcial das eventualidades garante a contribuição de um grupo importante na determinação do investimento em reciclagem técnica. Todavia, a contínua expansão de nossa atividade agrega valor ao estabelecimento da gestão inovadora da qual fazemos parte. Ainda assim, existem dúvidas a respeito de como a competitividade nas transações comerciais obstaculiza a apreciação da importância do remanejamento dos quadros funcionais. O empenho em analisar o início da atividade geral de formação de atitudes é uma das consequências dos relacionamentos verticais entre as hierarquias. Percebemos, cada vez mais, que o surgimento do comércio virtual pode nos levar a considerar a reestruturação dos procedimentos normalmente adotados. </p>
       </b-row>
-      <main-chart-example class="chart-wrapper" style="height:300px;margin-top:40px;" height="300"></main-chart-example>
       <div slot="footer">
         <ul>
           <li>

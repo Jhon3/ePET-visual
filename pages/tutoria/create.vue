@@ -1,8 +1,31 @@
 <template>
   <div>
-    <div v-if="disciplinas.length > 0">
+    <div>
       <b-card header="Disciplinas cadastradas">
         <!-- TODO::remover esse style -->
+        <div>
+        <form @submit="submitForm">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Tema</label>
+            <input type="text" class="form-control" v-model="tema" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Local</label>
+            <input type="text" class="form-control" v-model="local" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Data</label>
+            <input type="date" class="form-control" v-model="data" />
+          </div>
+
+          <b-form-group label="Anexo">
+                <label><input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+                </label>
+
+              </b-form-group>
+          
+        </form>
+        </div>
         <a
           class="btn btn-sm btn-primary float-right"
           style="color: white"
@@ -37,7 +60,7 @@
         </nav>
       </b-card>
     </div>
-    <div class="row" v-else>Nenhuma Disciplina cadastrada</div>
+    <div class="row">Nenhuma Disciplina cadastrada</div>
   </div>
 </template>
 
@@ -52,6 +75,10 @@ export default {
   layout: "menu/petiano",
   data() {
     return {
+      tema: '',
+      local: '',
+      file: '',
+      data: '',
       disciplinas: [],
       currentPessoa:[],
       currentPetiano:[],
@@ -101,7 +128,10 @@ export default {
           location.reload()
         }, 1500)
       });
-    }
+    },
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    },
   }
   /*methods: {
     del(id, rowId){
