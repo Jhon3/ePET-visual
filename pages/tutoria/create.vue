@@ -24,43 +24,15 @@
 
               </b-form-group>
           
+        
+        <div class="form-group">
+            <button type="submit">Enviar</button>
+        </div>
         </form>
         </div>
-        <a
-          class="btn btn-sm btn-primary float-right"
-          style="color: white"
-          href="../disciplina/create"
-        >Adicionar Disciplina</a>
-        <b-table
-          responsive="sm"
-          :items="disciplinas"
-          :current-page="currentPage"
-          :bordered="true"
-          :per-page="10"
-          :fields="fields"
-        >
-          <template v-slot:cell(actions)="row">
-            <b-button @click="cadastrar(row.item.idDisciplina)" class="btn btn-sm btn-primary">Virar tutor</b-button>
-            <!--<a
-              class="btn btn-sm btn-primary"
-              style="color: white"
-              href='disciplina/edit/${row.item.id_disciplina}'
-            >Editar {{row.item.id_disciplina}}</a>-->
-          </template>
-        </b-table>
-        <nav>
-          <b-pagination
-            :total-rows="disciplinas.length"
-            :per-page="10"
-            v-model="currentPage"
-            prev-text="Prev"
-            next-text="Next"
-            hide-goto-end-buttons
-          />
-        </nav>
+        
       </b-card>
     </div>
-    <div class="row">Nenhuma Disciplina cadastrada</div>
   </div>
 </template>
 
@@ -91,9 +63,6 @@ export default {
     };
   },
   mounted() {
-    axios.get("disciplinas").then(res => {
-      this.disciplinas = res.data;
-    });
     axios.get("pessoas-usuario").then(res => {
       this.currentPessoa = res.data;
       if(res.data.tipo_usuario.nome != "petiano" && res.data.tipo_usuario.nome != "tutor")
@@ -110,7 +79,7 @@ export default {
     console.log("petianos-pessoa/");
   },
   methods: {
-    cadastrar(id){
+    submitForm(e){
       /*this.$router.push(
         {
           path: 'edit/',
@@ -119,15 +88,46 @@ export default {
                     "codigo":codigo}
         }
       )*/
-      console.log("tutoria-cadastro/" + this.currentPetiano.idPetiano +"/"+id+"/");
-      axios.post("tutoria-cadastro/" + this.currentPetiano.idPetiano +"/"+id+"/").then(() => {
+      let idSalvo = null;
+      console.log("Clicou")
+      console.log("tutoria-cadastro/" + this.currentPetiano.idPetiano +"/1/");
+      console.log("Data = " + this.tema + "\nLocal = " + this.local)
+      axios.post("/tutoria-cadastro/" + this.currentPetiano.idPetiano +"/1/", {
+        tema: this.tema,
+        local: this.local,
+        data: this.data
+      }).then(res => {
         // para não ter que atualizar os eventos em tempo real forçarei a página a atualizar
         alert('Tutoria cadastrada com sucesso');
-        let vm = this;
-        setTimeout(function(){
-          location.reload()
-        }, 1500)
+        console.log(res)
+        idSalvo = res.data.content.idTutoria;
+        //let vm = this;
+        //setTimeout(function(){
+        //  location.reload()
+        //}, 1500)
+      }).catch( err => {console.log(err)});
+
+      const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
       });
+      let arquivo = toBase64(this.file);
+
+      /*let formData = new FormData(); 
+      formData.append('file', this.file);      
+      let arquivo = new URLSearchParams(formData).toString();
+      */
+      
+      axios.post("/anexos-tutoria-cadastro/12", {
+        anexos : arquivo
+        }).then(res => {
+          alert('Anexo cadastrado com sucesso.')
+        }).catch(err => {console.log(err)});
+      console.log("Arquivo = " + arquivo)
+      console.log("FUNCIONOU!")
+
     },
     handleFileUpload(){
       this.file = this.$refs.file.files[0];

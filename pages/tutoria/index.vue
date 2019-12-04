@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div v-if="tutorias.length > 0">
+    <div>
       <b-card header="Tutores cadastrados">
-        <!-- TODO::remover esse style -->
+         <!--TODO::remover esse style -->
         <a
           class="btn btn-sm btn-primary float-right"
           style="color: white"
@@ -22,22 +22,16 @@
               </div>
           </template>
           <template v-slot:cell(actions)="row">
-            <b-button @click="del(row.item.idTutoria, row.index)" class="btn btn-sm btn-danger">Deletar</b-button>
+            <b-button @click="del(row.item.tutoria.idTutoria, row.index)" class="btn btn-sm btn-danger">Deletar</b-button>
+            <b-button
+                  @click="downloadfile(row.item)"
+                  class="btn btn-sm"
+                >Download</b-button>
           </template>
         </b-table>
-        <nav>
-          <b-pagination
-            :total-rows="tutorias.length"
-            :per-page="10"
-            v-model="currentPage"
-            prev-text="Prev"
-            next-text="Next"
-            hide-goto-end-buttons
-          />
-        </nav>
+        
       </b-card>
     </div>
-    <div class="row" v-else>Nenhuma Tutorias cadastrado</div>
   </div>
 </template>
 
@@ -55,17 +49,18 @@ export default {
       tutorias: [],
       currentPage: 1,
       fields: [
-        { key: "disciplina.nome", label:"Nome da Disciplina", sortable: true },
-        { key: "disciplina.codigo", label:"Código da Disciplina", sortable: true },
-        { key: "petiano.pessoa.nome", label:"Nome do Petiano", sortable: true },
+        { key: "tutoria.disciplina.nome", label:"Nome da Disciplina", sortable: true },
+        { key: "tutoria.disciplina.codigo", label:"Código da Disciplina", sortable: true },
+        { key: "tutoria.petiano.pessoa.nome", label:"Nome do Petiano", sortable: true },
         { key: "actions", sortable: true },
       ]
     };
   },
   mounted() {
-    axios.get("tutorias").then(res => {
-      this.tutorias = res.data.content;
-    });
+    axios.get("/anexos-tutoria").then(res => {
+      this.tutorias = res.data;
+      
+    }).catch(err => {console.log(err)});
   },
   methods: {
     del(id, rowId){
@@ -74,6 +69,13 @@ export default {
         this.tutorias.splice(rowId, 1);
         alert('Tutoria removido com sucesso');
       });
+    },
+    downloadfile(file){
+      window.open('data:text/html;charset=utf-8,' +
+        encodeURIComponent(
+          file.anexos
+        )
+      )
     }
   }
 };

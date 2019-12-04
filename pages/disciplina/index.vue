@@ -64,6 +64,7 @@ export default {
   mounted() {
     axios.get("disciplinas").then(res => {
       this.disciplinas = res.data;
+      console.log(res.data)
     });
   },
   methods: {
