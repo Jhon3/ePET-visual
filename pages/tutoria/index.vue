@@ -13,7 +13,7 @@
           :items="tutorias"
           :current-page="currentPage"
           :bordered="true"
-          :per-page="10"
+          :per-page="100"
           :fields="fields"
         >
           <template v-slot:cell(ativo)="row">
@@ -22,7 +22,7 @@
               </div>
           </template>
           <template v-slot:cell(actions)="row">
-            <b-button @click="del(row.item.tutoria.idTutoria, row.index)" class="btn btn-sm btn-danger">Deletar</b-button>
+            <b-button @click="del(row.item.idTutoria, row.index)" class="btn btn-sm btn-danger">Deletar</b-button>
             <b-button
                   @click="downloadfile(row.item)"
                   class="btn btn-sm"
@@ -49,16 +49,16 @@ export default {
       tutorias: [],
       currentPage: 1,
       fields: [
-        { key: "tutoria.disciplina.nome", label:"Nome da Disciplina", sortable: true },
-        { key: "tutoria.disciplina.codigo", label:"Código da Disciplina", sortable: true },
-        { key: "tutoria.petiano.pessoa.nome", label:"Nome do Petiano", sortable: true },
+        { key: "disciplina.nome", label:"Nome da Disciplina", sortable: true },
+        { key: "disciplina.codigo", label:"Código da Disciplina", sortable: true },
+        { key: "petiano.pessoa.nome", label:"Nome do Petiano", sortable: true },
         { key: "actions", sortable: true },
       ]
     };
   },
   mounted() {
-    axios.get("/anexos-tutoria").then(res => {
-      this.tutorias = res.data;
+    axios.get("/tutorias").then(res => {
+      this.tutorias = res.data.content;
       
     }).catch(err => {console.log(err)});
   },

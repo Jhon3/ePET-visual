@@ -10,6 +10,10 @@
             <input type="text" class="form-control" v-model="tema" />
           </div>
           <div class="form-group">
+            <label for="exampleFormControlInput1">Código</label>
+            <input type="text" class="form-control" v-model="codMateria" />
+          </div>
+          <div class="form-group">
             <label for="exampleFormControlInput1">Local</label>
             <input type="text" class="form-control" v-model="local" />
           </div>
@@ -49,6 +53,7 @@ export default {
     return {
       tema: '',
       local: '',
+      codMateria: '',
       file: '',
       data: '',
       disciplinas: [],
@@ -90,9 +95,9 @@ export default {
       )*/
       let idSalvo = null;
       console.log("Clicou")
-      console.log("tutoria-cadastro/" + this.currentPetiano.idPetiano +"/1/");
+      console.log("tutoria-cadastro/" + this.currentPetiano.idPetiano +"/"+ this.codMateria +"/");
       console.log("Data = " + this.tema + "\nLocal = " + this.local)
-      axios.post("/tutoria-cadastro/" + this.currentPetiano.idPetiano +"/1/", {
+      axios.post("/tutoria-cadastro/" + this.currentPetiano.idPetiano +"/" + this.codMateria + "/", {
         tema: this.tema,
         local: this.local,
         data: this.data
@@ -100,33 +105,33 @@ export default {
         // para não ter que atualizar os eventos em tempo real forçarei a página a atualizar
         alert('Tutoria cadastrada com sucesso');
         console.log(res)
-        idSalvo = res.data.content.idTutoria;
+        idSalvo = res.data.idTutoria;
         //let vm = this;
         //setTimeout(function(){
         //  location.reload()
         //}, 1500)
       }).catch( err => {console.log(err)});
 
-      const toBase64 = file => new Promise((resolve, reject) => {
+      /*const toBase64 = file => new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
         reader.onerror = error => reject(error);
       });
-      let arquivo = toBase64(this.file);
+      let arquivo = toBase64(this.file);*/
 
       /*let formData = new FormData(); 
       formData.append('file', this.file);      
       let arquivo = new URLSearchParams(formData).toString();
       */
       
-      axios.post("/anexos-tutoria-cadastro/12", {
+      /*axios.post("/anexos-tutoria-cadastro/12", {
         anexos : arquivo
         }).then(res => {
           alert('Anexo cadastrado com sucesso.')
         }).catch(err => {console.log(err)});
       console.log("Arquivo = " + arquivo)
-      console.log("FUNCIONOU!")
+      console.log("FUNCIONOU!")*/
 
     },
     handleFileUpload(){
